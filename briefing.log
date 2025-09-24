@@ -326,3 +326,60 @@
 2025-09-24 11:32:51,658 - __main__ - INFO - ✅ All messages sent successfully!
 2025-09-24 11:32:51,658 - __main__ - INFO - ✅ Pipeline completed successfully
 2025-09-24 11:32:51,658 - __main__ - INFO - ⏱️ Execution time: 0:00:38.707313
+2025-09-24 15:31:17,320 - __main__ - INFO - 🚀 Starting Telegram Daily Briefing
+2025-09-24 15:31:17,322 - __main__ - INFO - ✅ Configuration loaded
+2025-09-24 15:31:17,322 - content_processor - INFO - 📁 Loaded 10 processed URLs
+2025-09-24 15:31:17,323 - __main__ - INFO - ✅ Components initialized
+2025-09-24 15:31:17,323 - __main__ - INFO - 🔍 Testing Telegram connection...
+2025-09-24 15:31:18,356 - telegram_sender - INFO - 🤖 Connected to bot: @TraydeNewsbot
+2025-09-24 15:31:18,356 - __main__ - INFO - 🔍 Phase 1: Collecting news...
+2025-09-24 15:31:18,356 - news_collector - INFO - 🔍 Starting news collection from all sources
+2025-09-24 15:31:18,356 - news_collector - INFO - 📡 Collected 1 items from APIs
+2025-09-24 15:31:18,356 - news_collector - INFO - 📡 [1/12] Fetching RSS from techcrunch
+2025-09-24 15:31:18,489 - news_collector - INFO -    ✅ Collected 3 items from techcrunch
+2025-09-24 15:31:18,489 - news_collector - INFO - 📡 [2/12] Fetching RSS from venturebeat
+2025-09-24 15:31:21,521 - news_collector - INFO -    ✅ Collected 3 items from venturebeat
+2025-09-24 15:31:21,522 - news_collector - INFO - 📡 [3/12] Fetching RSS from mit_tech_review
+2025-09-24 15:31:24,129 - news_collector - INFO -    ✅ Collected 3 items from mit_tech_review
+2025-09-24 15:31:24,129 - news_collector - INFO - 📡 [4/12] Fetching RSS from ars_technica
+2025-09-24 15:31:26,571 - news_collector - INFO -    ✅ Collected 3 items from ars_technica
+2025-09-24 15:31:26,571 - news_collector - INFO - 📡 [5/12] Fetching RSS from the_verge
+2025-09-24 15:31:28,878 - news_collector - INFO -    ✅ Collected 3 items from the_verge
+2025-09-24 15:31:28,878 - news_collector - INFO - 📡 [6/12] Fetching RSS from wired
+2025-09-24 15:31:31,071 - news_collector - INFO -    ✅ Collected 3 items from wired
+2025-09-24 15:31:31,071 - news_collector - INFO - 📡 [7/12] Fetching RSS from hacker_news_ai
+2025-09-24 15:31:33,879 - news_collector - INFO -    ✅ Collected 3 items from hacker_news_ai
+2025-09-24 15:31:33,879 - news_collector - INFO - 📡 [8/12] Fetching RSS from ai_news
+2025-09-24 15:31:38,484 - news_collector - INFO -    ✅ Collected 3 items from ai_news
+2025-09-24 15:31:38,484 - news_collector - INFO - 📡 [9/12] Fetching RSS from tecnoblog
+2025-09-24 15:31:41,172 - news_collector - INFO -    ✅ Collected 3 items from tecnoblog
+2025-09-24 15:31:41,172 - news_collector - INFO - 📡 [10/12] Fetching RSS from olhar_digital
+2025-09-24 15:31:43,789 - news_collector - INFO -    ✅ Collected 3 items from olhar_digital
+2025-09-24 15:31:43,790 - news_collector - INFO - 📡 [11/12] Fetching RSS from canaltech
+2025-09-24 15:31:47,825 - news_collector - INFO -    ✅ Collected 3 items from canaltech
+2025-09-24 15:31:47,825 - news_collector - INFO - 📡 [12/12] Fetching RSS from startups
+2025-09-24 15:31:51,932 - news_collector - INFO -    ✅ Collected 3 items from startups
+2025-09-24 15:31:51,932 - news_collector - INFO - 📰 Collected 36 items from RSS feeds
+2025-09-24 15:31:51,933 - news_collector - INFO - 🌐 Scraping thais_martan_linkedin (linkedin)
+2025-09-24 15:31:54,778 - news_collector - WARNING - LinkedIn request failed: 999
+2025-09-24 15:31:54,780 - news_collector - INFO -    ✅ Collected 0 items from thais_martan_linkedin
+2025-09-24 15:31:54,781 - news_collector - INFO - 🌐 Scraping thais_martan_instagram (instagram)
+2025-09-24 15:31:57,351 - news_collector - INFO -    ✅ Collected 1 items from thais_martan_instagram
+2025-09-24 15:31:58,547 - news_collector - INFO - 🌐 Collected 1 items from web scraping
+2025-09-24 15:31:58,549 - news_collector - INFO - 🎯 Filtered to 31 relevant items
+2025-09-24 15:31:58,549 - __main__ - INFO - 🎯 Phase 2: Processing content...
+2025-09-24 15:31:58,549 - content_processor - INFO - 🎯 Processing 31 news items
+2025-09-24 15:31:58,549 - content_processor - INFO - 🗑️ Removed duplicates: 31 unique items
+2025-09-24 15:31:58,549 - content_processor - INFO - 🔄 Filtered already processed: 28 new items
+2025-09-24 15:31:58,549 - content_processor - INFO - ⭐ Prioritized by relevance
+2025-09-24 15:31:58,549 - content_processor - INFO - 📏 Limited to 10 items
+2025-09-24 15:31:58,550 - content_processor - INFO - 💾 Saved 20 processed URLs
+2025-09-24 15:31:58,550 - __main__ - INFO - 📝 Phase 3: Formatting messages...
+2025-09-24 15:31:58,550 - message_formatter - INFO - 📝 Formatting 10 news items into messages
+2025-09-24 15:31:58,551 - message_formatter - INFO - 📨 Generated 1 message(s) for Telegram
+2025-09-24 15:31:58,552 - __main__ - INFO - 📤 Phase 4: Sending 1 message(s)...
+2025-09-24 15:31:58,552 - telegram_sender - INFO - 📤 Sending message 1/1
+2025-09-24 15:31:58,922 - telegram_sender - INFO - ✅ Message 1 sent successfully
+2025-09-24 15:31:58,922 - __main__ - INFO - ✅ All messages sent successfully!
+2025-09-24 15:31:58,922 - __main__ - INFO - ✅ Pipeline completed successfully
+2025-09-24 15:31:58,922 - __main__ - INFO - ⏱️ Execution time: 0:00:41.602810
