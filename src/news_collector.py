@@ -450,7 +450,24 @@ class NewsCollector:
         if any(social in text_lower for social in ['linkedin', 'instagram', 'thais martan']):
             score += 0.8  # Bônus significativo para conteúdo da Thais
 
-        return min(score, 3.0)  # Máximo 3.0 (aumentado devido aos bônus)
+        # Penalização para conteúdo genérico ou promocional
+        penalty_keywords = [
+            'subscribe', 'newsletter', 'advertisement', 'sponsored',
+            'breaking news', 'exclusive', 'trending', 'viral'
+        ]
+        if any(penalty in text_lower for penalty in penalty_keywords):
+            score -= 0.3  # Penalização leve para conteúdo promocional
+
+        # Bônus para conteúdo técnico específico
+        technical_bonus = [
+            'algorithm', 'training data', 'fine-tuning', 'prompt engineering',
+            'reinforcement learning', 'transformer', 'attention mechanism',
+            'machine translation', 'computer vision', 'nlp', 'mlops'
+        ]
+        technical_matches = sum(1 for tech in technical_bonus if tech in text_lower)
+        score += min(technical_matches * 0.2, 0.8)  # Bônus até 0.8 para conteúdo técnico
+
+        return min(max(score, 0.0), 3.0)  # Mínimo 0.0, máximo 3.0
 
     def _parse_rss_date(self, entry) -> Optional[datetime]:
         """Parse RSS date formats"""

@@ -27,6 +27,24 @@ from telegram_sender import TelegramSender
 from content_processor import ContentProcessor
 from message_formatter import MessageFormatter
 
+# Import alert system
+try:
+    from alerts import send_alert, get_alert_system
+    ALERTS_ENABLED = True
+except ImportError:
+    ALERTS_ENABLED = False
+    def send_alert(*args, **kwargs):
+        pass
+
+# Import log rotation
+try:
+    from log_rotate import check_and_rotate_logs
+    LOG_ROTATION_ENABLED = True
+except ImportError:
+    LOG_ROTATION_ENABLED = False
+    def check_and_rotate_logs():
+        return False
+
 def load_config() -> dict:
     """Load configuration from JSON files"""
     config_dir = Path(__file__).parent.parent / 'config'
@@ -49,6 +67,27 @@ def main():
     logger.info("🚀 Starting Telegram Daily Briefing")
 
     try:
+        # Verificação e rotação de logs (se habilitado)
+        if LOG_ROTATION_ENABLED:
+            try:
+                rotated = check_and_rotate_logs()
+                if rotated:
+                    logger.info("📏 Log file was rotated during startup")
+            except Exception as e:
+                logger.warning(f"Log rotation check failed: {e}")
+
+        # Verificação de saúde do sistema (se alertas habilitados)
+        if ALERTS_ENABLED:
+            try:
+                alert_system = get_alert_system()
+                health_issues = alert_system.check_system_health()
+                if health_issues:
+                    logger.warning(f"⚠️ Health check found {len(health_issues)} issues")
+                    for issue in health_issues:
+                        logger.warning(f"   {issue}")
+            except Exception as e:
+                logger.warning(f"Health check failed: {e}")
+
         # Load configuration
         config = load_config()
         logger.info("✅ Configuration loaded")
@@ -98,7 +137,12 @@ def main():
         logger.info("✅ Pipeline completed successfully")
 
     except Exception as e:
-        logger.error(f"❌ Pipeline failed: {e}")
+        error_message = f"Pipeline failed: {str(e)}"
+        logger.error(f"❌ {error_message}")
+
+        # Envia alerta de falha
+        send_alert('execution_failure', error_message, 'error')
+
         raise
 
     finally:
