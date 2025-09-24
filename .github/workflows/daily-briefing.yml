@@ -43,6 +43,19 @@ jobs:
         HAS_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN != '' }}
         HAS_CHAT: ${{ secrets.TELEGRAM_CHAT_ID != '' }}
 
+    - name: Telegram preflight ping
+      env:
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      run: |
+        set -e
+        echo "🔎 Telegram getMe:" 
+        curl -sS -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getMe"
+        echo "\n📨 Sending preflight message..."
+        curl -sS -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+             -H "Content-Type: application/json" \
+             -d "{\"chat_id\":\"${TELEGRAM_CHAT_ID}\",\"text\":\"✅ GitHub Actions preflight ping\",\"disable_web_page_preview\":true}"
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -56,6 +69,7 @@ jobs:
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         DEBUG: ${{ github.event_name == 'workflow_dispatch' }}
+        SEND_EMPTY_BRIEFING: true
       run: |
         echo "🚀 Starting AI News Briefing at $(date)"
         python src/main.py 2>&1 | tee logs/briefing_$(date +%Y%m%d_%H%M%S).log
