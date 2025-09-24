@@ -136,6 +136,16 @@ def main():
                 raise RuntimeError("Telegram send failed")
         else:
             logger.info("ℹ️ No news to send today")
+            # Optionally send a heartbeat message if configured
+            send_empty = os.getenv('SEND_EMPTY_BRIEFING', 'false').lower() == 'true'
+            if send_empty:
+                heartbeat = (
+                    "✅ Briefing executado, sem novas notícias relevantes nas últimas 24h.\n"
+                    f"🕒 {datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')}"
+                )
+                logger.info("📤 Sending heartbeat message (no news)...")
+                if not sender.send_messages([heartbeat]):
+                    raise RuntimeError("Heartbeat send failed")
 
         logger.info("✅ Pipeline completed successfully")
 
