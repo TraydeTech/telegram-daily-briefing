@@ -1,0 +1,32 @@
+{
+  "sources": {
+    "apis": {
+      "openai": {
+        "url": "https://api.openai.com/v1/models",
+        "headers": {
+          "Authorization": "Bearer ${OPENAI_API_KEY}"
+        }
+      },
+      "anthropic": {
+        "url": "https://api.anthropic.com/v1/models",
+        "headers": {
+          "x-api-key": "${ANTHROPIC_API_KEY}",
+          "anthropic-version": "2023-06-01"
+        }
+      }
+    },
+    "rss_feeds": {
+      "techcrunch": "https://techcrunch.com/feed/",
+      "venturebeat": "https://feeds.feedburner.com/venturebeat/SZYF",
+      "mit_tech_review": "https://www.technologyreview.com/topnews.rss",
+      "ars_technica": "https://feeds.arstechnica.com/arstechnica/index",
+      "the_verge": "https://www.theverge.com/rss/index.xml",
+      "wired": "https://www.wired.com/feed/rss",
+      "hacker_news_ai": "https://hnrss.org/frontpage",
+      "ai_news": "https://artificialintelligence-news.com/feed/"
+    },
+    "web_scraping": {
+      "sites": []
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "telegram": {
+    "bot_token": "${TELEGRAM_BOT_TOKEN}",
+    "chat_id": "${TELEGRAM_CHAT_ID}"
+  },
+  "news": {
+    "max_age_hours": 24,
+    "max_news_per_run": 10,
+    "keywords": {
+      "high_priority": ["ChatGPT", "Cursor", "Lovable"],
+      "medium_priority": ["AI", "artificial intelligence", "machine learning", "deep learning"],
+      "low_priority": ["tech", "technology", "startup"]
+    }
+  },
+  "formatting": {
+    "max_message_length": 4000,
+    "summary_max_length": 150,
+    "format_template": "📰 {title}\n📝 {summary}\n🔗 {url}\n\n"
+  },
+  "processing": {
+    "state_file": "news_state.json",
+    "request_delay": 1.0,
+    "max_retries": 3
+  },
+  "logging": {
+    "level": "INFO",
+    "file": "briefing.log"
+  }
+}

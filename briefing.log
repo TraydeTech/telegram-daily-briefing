@@ -1,0 +1,218 @@
+2025-09-24 10:56:32,721 - __main__ - INFO - 🚀 Starting Telegram Daily Briefing
+2025-09-24 10:56:32,721 - __main__ - INFO - ✅ Configuration loaded
+2025-09-24 10:56:32,722 - content_processor - INFO - 📁 No previous state file found, starting fresh
+2025-09-24 10:56:32,723 - __main__ - INFO - ✅ Components initialized
+2025-09-24 10:56:32,723 - __main__ - INFO - 🔍 Testing Telegram connection...
+2025-09-24 10:56:33,351 - telegram_sender - INFO - 🤖 Connected to bot: @TraydeNewsbot
+2025-09-24 10:56:33,351 - __main__ - INFO - 🔍 Phase 1: Collecting news...
+2025-09-24 10:56:33,352 - news_collector - INFO - 🔍 Starting news collection from all sources
+2025-09-24 10:56:33,352 - news_collector - INFO - 📡 Collected 1 items from APIs
+2025-09-24 10:56:33,352 - news_collector - INFO - 📰 Collected 0 items from RSS feeds
+2025-09-24 10:56:34,543 - news_collector - INFO - 🌐 Collected 0 items from web scraping
+2025-09-24 10:56:34,543 - news_collector - INFO - 🎯 Filtered to 1 relevant items
+2025-09-24 10:56:34,544 - __main__ - INFO - 🎯 Phase 2: Processing content...
+2025-09-24 10:56:34,544 - content_processor - INFO - 🎯 Processing 1 news items
+2025-09-24 10:56:34,544 - content_processor - INFO - 🗑️ Removed duplicates: 1 unique items
+2025-09-24 10:56:34,544 - content_processor - INFO - 🔄 Filtered already processed: 1 new items
+2025-09-24 10:56:34,544 - content_processor - INFO - ⭐ Prioritized by relevance
+2025-09-24 10:56:34,544 - content_processor - INFO - 📏 Limited to 1 items
+2025-09-24 10:56:34,545 - content_processor - INFO - 💾 Saved 1 processed URLs
+2025-09-24 10:56:34,546 - __main__ - INFO - 📝 Phase 3: Formatting messages...
+2025-09-24 10:56:34,546 - message_formatter - INFO - 📝 Formatting 1 news items into messages
+2025-09-24 10:56:34,547 - message_formatter - INFO - 📨 Generated 1 message(s) for Telegram
+2025-09-24 10:56:34,547 - __main__ - INFO - 📤 Phase 4: Sending 1 message(s)...
+2025-09-24 10:56:34,547 - telegram_sender - INFO - 📤 Sending message 1/1
+2025-09-24 10:56:34,931 - telegram_sender - INFO - ✅ Message 1 sent successfully
+2025-09-24 10:56:34,932 - __main__ - INFO - ✅ All messages sent successfully!
+2025-09-24 10:56:34,932 - __main__ - INFO - ✅ Pipeline completed successfully
+2025-09-24 10:56:34,932 - __main__ - INFO - ⏱️ Execution time: 0:00:02.211110
+2025-09-24 10:58:38,198 - __main__ - INFO - 🚀 Starting Telegram Daily Briefing
+2025-09-24 10:58:38,199 - __main__ - INFO - ✅ Configuration loaded
+2025-09-24 10:58:38,200 - content_processor - INFO - 📁 No previous state file found, starting fresh
+2025-09-24 10:58:38,200 - __main__ - INFO - ✅ Components initialized
+2025-09-24 10:58:38,200 - __main__ - INFO - 🔍 Phase 1: Collecting news...
+2025-09-24 10:58:38,200 - news_collector - INFO - 🔍 Starting news collection from all sources
+2025-09-24 10:58:38,200 - news_collector - INFO - 📡 Collected 1 items from APIs
+2025-09-24 10:58:38,200 - news_collector - INFO - 📰 Collected 0 items from RSS feeds
+2025-09-24 10:58:39,387 - news_collector - INFO - 🌐 Collected 0 items from web scraping
+2025-09-24 10:58:39,387 - news_collector - INFO - 🎯 Filtered to 1 relevant items
+2025-09-24 10:58:39,388 - __main__ - INFO - 🎯 Phase 2: Processing content...
+2025-09-24 10:58:39,388 - content_processor - INFO - 🎯 Processing 1 news items
+2025-09-24 10:58:39,388 - content_processor - INFO - 🗑️ Removed duplicates: 1 unique items
+2025-09-24 10:58:39,388 - content_processor - INFO - 🔄 Filtered already processed: 1 new items
+2025-09-24 10:58:39,388 - content_processor - INFO - ⭐ Prioritized by relevance
+2025-09-24 10:58:39,388 - content_processor - INFO - 📏 Limited to 1 items
+2025-09-24 10:58:39,389 - content_processor - INFO - 💾 Saved 1 processed URLs
+2025-09-24 10:58:39,389 - __main__ - INFO - 📝 Phase 3: Formatting messages...
+2025-09-24 10:58:39,389 - message_formatter - INFO - 📝 Formatting 1 news items into messages
+2025-09-24 10:58:39,390 - message_formatter - INFO - 📨 Generated 1 message(s) for Telegram
+2025-09-24 10:58:39,390 - __main__ - INFO - 📤 Phase 4: Sending 1 message(s)...
+2025-09-24 10:58:39,390 - telegram_sender - INFO - 📤 Sending message 1/1
+2025-09-24 10:58:40,174 - telegram_sender - INFO - ✅ Message 1 sent successfully
+2025-09-24 10:58:40,174 - __main__ - INFO - ✅ All messages sent successfully!
+2025-09-24 10:58:40,174 - __main__ - INFO - ✅ Pipeline completed successfully
+2025-09-24 10:58:40,174 - __main__ - INFO - ⏱️ Execution time: 0:00:01.975985
+2025-09-24 10:59:50,975 - __main__ - INFO - 🚀 Starting Telegram Daily Briefing
+2025-09-24 10:59:50,976 - __main__ - INFO - ✅ Configuration loaded
+2025-09-24 10:59:50,976 - content_processor - INFO - 📁 No previous state file found, starting fresh
+2025-09-24 10:59:50,977 - __main__ - INFO - ✅ Components initialized
+2025-09-24 10:59:50,977 - __main__ - INFO - 🔍 Testing Telegram connection...
+2025-09-24 10:59:51,624 - telegram_sender - INFO - 🤖 Connected to bot: @TraydeNewsbot
+2025-09-24 10:59:51,625 - __main__ - INFO - 🔍 Phase 1: Collecting news...
+2025-09-24 10:59:51,625 - news_collector - INFO - 🔍 Starting news collection from all sources
+2025-09-24 10:59:51,625 - news_collector - INFO - 📡 Collected 1 items from APIs
+2025-09-24 10:59:51,625 - news_collector - INFO - 📰 Collected 0 items from RSS feeds
+2025-09-24 10:59:52,799 - news_collector - INFO - 🌐 Collected 0 items from web scraping
+2025-09-24 10:59:52,799 - news_collector - INFO - 🎯 Filtered to 1 relevant items
+2025-09-24 10:59:52,799 - __main__ - INFO - 🎯 Phase 2: Processing content...
+2025-09-24 10:59:52,799 - content_processor - INFO - 🎯 Processing 1 news items
+2025-09-24 10:59:52,799 - content_processor - INFO - 🗑️ Removed duplicates: 1 unique items
+2025-09-24 10:59:52,799 - content_processor - INFO - 🔄 Filtered already processed: 1 new items
+2025-09-24 10:59:52,799 - content_processor - INFO - ⭐ Prioritized by relevance
+2025-09-24 10:59:52,800 - content_processor - INFO - 📏 Limited to 1 items
+2025-09-24 10:59:52,800 - content_processor - INFO - 💾 Saved 1 processed URLs
+2025-09-24 10:59:52,800 - __main__ - INFO - 📝 Phase 3: Formatting messages...
+2025-09-24 10:59:52,800 - message_formatter - INFO - 📝 Formatting 1 news items into messages
+2025-09-24 10:59:52,800 - message_formatter - INFO - 📨 Generated 1 message(s) for Telegram
+2025-09-24 10:59:52,800 - __main__ - INFO - 📤 Phase 4: Sending 1 message(s)...
+2025-09-24 10:59:52,801 - telegram_sender - INFO - 📤 Sending message 1/1
+2025-09-24 10:59:53,247 - telegram_sender - INFO - ✅ Message 1 sent successfully
+2025-09-24 10:59:53,248 - __main__ - INFO - ✅ All messages sent successfully!
+2025-09-24 10:59:53,248 - __main__ - INFO - ✅ Pipeline completed successfully
+2025-09-24 10:59:53,248 - __main__ - INFO - ⏱️ Execution time: 0:00:02.272476
+2025-09-24 11:01:20,184 - __main__ - INFO - 🚀 Starting Telegram Daily Briefing
+2025-09-24 11:01:20,185 - __main__ - INFO - ✅ Configuration loaded
+2025-09-24 11:01:20,185 - content_processor - INFO - 📁 No previous state file found, starting fresh
+2025-09-24 11:01:20,185 - __main__ - INFO - ✅ Components initialized
+2025-09-24 11:01:20,185 - __main__ - INFO - 🔍 Phase 1: Collecting news...
+2025-09-24 11:01:20,185 - news_collector - INFO - 🔍 Starting news collection from all sources
+2025-09-24 11:01:20,186 - news_collector - INFO - 📡 Collected 1 items from APIs
+2025-09-24 11:01:20,186 - news_collector - INFO - 📰 Collected 0 items from RSS feeds
+2025-09-24 11:01:21,367 - news_collector - INFO - 🌐 Collected 0 items from web scraping
+2025-09-24 11:01:21,368 - news_collector - INFO - 🎯 Filtered to 1 relevant items
+2025-09-24 11:01:21,368 - __main__ - INFO - 🎯 Phase 2: Processing content...
+2025-09-24 11:01:21,368 - content_processor - INFO - 🎯 Processing 1 news items
+2025-09-24 11:01:21,368 - content_processor - INFO - 🗑️ Removed duplicates: 1 unique items
+2025-09-24 11:01:21,368 - content_processor - INFO - 🔄 Filtered already processed: 1 new items
+2025-09-24 11:01:21,368 - content_processor - INFO - ⭐ Prioritized by relevance
+2025-09-24 11:01:21,368 - content_processor - INFO - 📏 Limited to 1 items
+2025-09-24 11:01:21,369 - content_processor - INFO - 💾 Saved 1 processed URLs
+2025-09-24 11:01:21,369 - __main__ - INFO - 📝 Phase 3: Formatting messages...
+2025-09-24 11:01:21,369 - message_formatter - INFO - 📝 Formatting 1 news items into messages
+2025-09-24 11:01:21,370 - message_formatter - INFO - 📨 Generated 1 message(s) for Telegram
+2025-09-24 11:01:21,370 - __main__ - INFO - 📤 Phase 4: Sending 1 message(s)...
+2025-09-24 11:01:21,370 - telegram_sender - INFO - 📤 Sending message 1/1
+2025-09-24 11:01:22,176 - telegram_sender - INFO - ✅ Message 1 sent successfully
+2025-09-24 11:01:22,176 - __main__ - INFO - ✅ All messages sent successfully!
+2025-09-24 11:01:22,177 - __main__ - INFO - ✅ Pipeline completed successfully
+2025-09-24 11:01:22,177 - __main__ - INFO - ⏱️ Execution time: 0:00:01.992688
+2025-09-24 11:03:08,809 - __main__ - INFO - 🚀 Starting Telegram Daily Briefing
+2025-09-24 11:03:08,810 - __main__ - INFO - ✅ Configuration loaded
+2025-09-24 11:03:08,810 - content_processor - INFO - 📁 No previous state file found, starting fresh
+2025-09-24 11:03:08,810 - __main__ - INFO - ✅ Components initialized
+2025-09-24 11:03:08,810 - __main__ - INFO - 🔍 Phase 1: Collecting news...
+2025-09-24 11:03:08,810 - news_collector - INFO - 🔍 Starting news collection from all sources
+2025-09-24 11:03:08,810 - news_collector - INFO - 📡 Collected 1 items from APIs
+2025-09-24 11:03:08,810 - news_collector - INFO - 📰 Collected 0 items from RSS feeds
+2025-09-24 11:03:09,992 - news_collector - INFO - 🌐 Collected 0 items from web scraping
+2025-09-24 11:03:09,993 - news_collector - INFO - 🎯 Filtered to 1 relevant items
+2025-09-24 11:03:09,993 - __main__ - INFO - 🎯 Phase 2: Processing content...
+2025-09-24 11:03:09,993 - content_processor - INFO - 🎯 Processing 1 news items
+2025-09-24 11:03:09,993 - content_processor - INFO - 🗑️ Removed duplicates: 1 unique items
+2025-09-24 11:03:09,993 - content_processor - INFO - 🔄 Filtered already processed: 1 new items
+2025-09-24 11:03:09,993 - content_processor - INFO - ⭐ Prioritized by relevance
+2025-09-24 11:03:09,993 - content_processor - INFO - 📏 Limited to 1 items
+2025-09-24 11:03:09,994 - content_processor - INFO - 💾 Saved 1 processed URLs
+2025-09-24 11:03:09,994 - __main__ - INFO - 📝 Phase 3: Formatting messages...
+2025-09-24 11:03:09,994 - message_formatter - INFO - 📝 Formatting 1 news items into messages
+2025-09-24 11:03:09,994 - message_formatter - INFO - 📨 Generated 1 message(s) for Telegram
+2025-09-24 11:03:09,994 - __main__ - INFO - 📤 Phase 4: Sending 1 message(s)...
+2025-09-24 11:03:09,994 - telegram_sender - INFO - 📤 Sending message 1/1
+2025-09-24 11:03:10,754 - telegram_sender - INFO - ✅ Message 1 sent successfully
+2025-09-24 11:03:10,754 - __main__ - INFO - ✅ All messages sent successfully!
+2025-09-24 11:03:10,754 - __main__ - INFO - ✅ Pipeline completed successfully
+2025-09-24 11:03:10,754 - __main__ - INFO - ⏱️ Execution time: 0:00:01.945372
+2025-09-24 11:11:46,643 - __main__ - INFO - 🚀 Starting Telegram Daily Briefing
+2025-09-24 11:11:46,644 - __main__ - INFO - ✅ Configuration loaded
+2025-09-24 11:11:46,644 - content_processor - INFO - 📁 No previous state file found, starting fresh
+2025-09-24 11:11:46,644 - __main__ - INFO - ✅ Components initialized
+2025-09-24 11:11:46,645 - __main__ - INFO - 🔍 Phase 1: Collecting news...
+2025-09-24 11:11:46,645 - news_collector - INFO - 🔍 Starting news collection from all sources
+2025-09-24 11:11:46,645 - news_collector - INFO - 📡 Collected 1 items from APIs
+2025-09-24 11:11:46,645 - news_collector - INFO - 📡 [1/8] Fetching RSS from techcrunch
+2025-09-24 11:11:46,764 - news_collector - INFO -    ✅ Collected 3 items from techcrunch
+2025-09-24 11:11:46,764 - news_collector - INFO - 📡 [2/8] Fetching RSS from venturebeat
+2025-09-24 11:11:49,768 - news_collector - INFO -    ✅ Collected 3 items from venturebeat
+2025-09-24 11:11:49,768 - news_collector - INFO - 📡 [3/8] Fetching RSS from mit_tech_review
+2025-09-24 11:11:52,151 - news_collector - INFO -    ✅ Collected 3 items from mit_tech_review
+2025-09-24 11:11:52,152 - news_collector - INFO - 📡 [4/8] Fetching RSS from ars_technica
+2025-09-24 11:11:54,374 - news_collector - INFO -    ✅ Collected 3 items from ars_technica
+2025-09-24 11:11:54,374 - news_collector - INFO - 📡 [5/8] Fetching RSS from the_verge
+2025-09-24 11:11:56,487 - news_collector - INFO -    ✅ Collected 3 items from the_verge
+2025-09-24 11:11:56,487 - news_collector - INFO - 📡 [6/8] Fetching RSS from wired
+2025-09-24 11:11:58,646 - news_collector - INFO -    ✅ Collected 3 items from wired
+2025-09-24 11:11:58,646 - news_collector - INFO - 📡 [7/8] Fetching RSS from hacker_news_ai
+2025-09-24 11:12:01,463 - news_collector - INFO -    ✅ Collected 3 items from hacker_news_ai
+2025-09-24 11:12:01,463 - news_collector - INFO - 📡 [8/8] Fetching RSS from ai_news
+2025-09-24 11:12:06,521 - news_collector - INFO -    ✅ Collected 3 items from ai_news
+2025-09-24 11:12:06,522 - news_collector - INFO - 📰 Collected 24 items from RSS feeds
+2025-09-24 11:12:07,697 - news_collector - INFO - 🌐 Collected 0 items from web scraping
+2025-09-24 11:12:07,698 - news_collector - INFO - 🎯 Filtered to 14 relevant items
+2025-09-24 11:12:07,698 - __main__ - INFO - 🎯 Phase 2: Processing content...
+2025-09-24 11:12:07,698 - content_processor - INFO - 🎯 Processing 14 news items
+2025-09-24 11:12:07,698 - content_processor - INFO - 🗑️ Removed duplicates: 14 unique items
+2025-09-24 11:12:07,698 - content_processor - INFO - 🔄 Filtered already processed: 14 new items
+2025-09-24 11:12:07,698 - content_processor - INFO - ⭐ Prioritized by relevance
+2025-09-24 11:12:07,698 - content_processor - INFO - 📏 Limited to 10 items
+2025-09-24 11:12:07,699 - content_processor - INFO - 💾 Saved 10 processed URLs
+2025-09-24 11:12:07,699 - __main__ - INFO - 📝 Phase 3: Formatting messages...
+2025-09-24 11:12:07,699 - message_formatter - INFO - 📝 Formatting 10 news items into messages
+2025-09-24 11:12:07,700 - message_formatter - INFO - 📨 Generated 1 message(s) for Telegram
+2025-09-24 11:12:07,700 - __main__ - INFO - 📤 Phase 4: Sending 1 message(s)...
+2025-09-24 11:12:07,701 - telegram_sender - INFO - 📤 Sending message 1/1
+2025-09-24 11:12:08,509 - telegram_sender - INFO - ✅ Message 1 sent successfully
+2025-09-24 11:12:08,509 - __main__ - INFO - ✅ All messages sent successfully!
+2025-09-24 11:12:08,509 - __main__ - INFO - ✅ Pipeline completed successfully
+2025-09-24 11:12:08,509 - __main__ - INFO - ⏱️ Execution time: 0:00:21.866019
+2025-09-24 11:13:04,530 - __main__ - INFO - 🚀 Starting Telegram Daily Briefing
+2025-09-24 11:13:04,531 - __main__ - INFO - ✅ Configuration loaded
+2025-09-24 11:13:04,531 - content_processor - INFO - 📁 Loaded 10 processed URLs
+2025-09-24 11:13:04,531 - __main__ - INFO - ✅ Components initialized
+2025-09-24 11:13:04,531 - __main__ - INFO - 🔍 Phase 1: Collecting news...
+2025-09-24 11:13:04,531 - news_collector - INFO - 🔍 Starting news collection from all sources
+2025-09-24 11:13:04,531 - news_collector - INFO - 📡 Collected 1 items from APIs
+2025-09-24 11:13:04,531 - news_collector - INFO - 📡 [1/8] Fetching RSS from techcrunch
+2025-09-24 11:13:04,654 - news_collector - INFO -    ✅ Collected 3 items from techcrunch
+2025-09-24 11:13:04,654 - news_collector - INFO - 📡 [2/8] Fetching RSS from venturebeat
+2025-09-24 11:13:07,656 - news_collector - INFO -    ✅ Collected 3 items from venturebeat
+2025-09-24 11:13:07,656 - news_collector - INFO - 📡 [3/8] Fetching RSS from mit_tech_review
+2025-09-24 11:13:09,865 - news_collector - INFO -    ✅ Collected 3 items from mit_tech_review
+2025-09-24 11:13:09,865 - news_collector - INFO - 📡 [4/8] Fetching RSS from ars_technica
+2025-09-24 11:13:11,998 - news_collector - INFO -    ✅ Collected 3 items from ars_technica
+2025-09-24 11:13:11,998 - news_collector - INFO - 📡 [5/8] Fetching RSS from the_verge
+2025-09-24 11:13:14,125 - news_collector - INFO -    ✅ Collected 3 items from the_verge
+2025-09-24 11:13:14,125 - news_collector - INFO - 📡 [6/8] Fetching RSS from wired
+2025-09-24 11:13:16,290 - news_collector - INFO -    ✅ Collected 3 items from wired
+2025-09-24 11:13:16,290 - news_collector - INFO - 📡 [7/8] Fetching RSS from hacker_news_ai
+2025-09-24 11:13:18,966 - news_collector - INFO -    ✅ Collected 3 items from hacker_news_ai
+2025-09-24 11:13:18,966 - news_collector - INFO - 📡 [8/8] Fetching RSS from ai_news
+2025-09-24 11:13:23,245 - news_collector - INFO -    ✅ Collected 3 items from ai_news
+2025-09-24 11:13:23,246 - news_collector - INFO - 📰 Collected 24 items from RSS feeds
+2025-09-24 11:13:24,432 - news_collector - INFO - 🌐 Collected 0 items from web scraping
+2025-09-24 11:13:24,433 - news_collector - INFO - 🎯 Filtered to 14 relevant items
+2025-09-24 11:13:24,433 - __main__ - INFO - 🎯 Phase 2: Processing content...
+2025-09-24 11:13:24,433 - content_processor - INFO - 🎯 Processing 14 news items
+2025-09-24 11:13:24,433 - content_processor - INFO - 🗑️ Removed duplicates: 14 unique items
+2025-09-24 11:13:24,433 - content_processor - INFO - 🔄 Filtered already processed: 4 new items
+2025-09-24 11:13:24,433 - content_processor - INFO - ⭐ Prioritized by relevance
+2025-09-24 11:13:24,434 - content_processor - INFO - 📏 Limited to 4 items
+2025-09-24 11:13:24,434 - content_processor - INFO - 💾 Saved 14 processed URLs
+2025-09-24 11:13:24,434 - __main__ - INFO - 📝 Phase 3: Formatting messages...
+2025-09-24 11:13:24,434 - message_formatter - INFO - 📝 Formatting 4 news items into messages
+2025-09-24 11:13:24,435 - message_formatter - INFO - 📨 Generated 1 message(s) for Telegram
+2025-09-24 11:13:24,436 - __main__ - INFO - 📤 Phase 4: Sending 1 message(s)...
+2025-09-24 11:13:24,436 - telegram_sender - INFO - 📤 Sending message 1/1
+2025-09-24 11:13:25,233 - telegram_sender - INFO - ✅ Message 1 sent successfully
+2025-09-24 11:13:25,233 - __main__ - INFO - ✅ All messages sent successfully!
+2025-09-24 11:13:25,233 - __main__ - INFO - ✅ Pipeline completed successfully
+2025-09-24 11:13:25,233 - __main__ - INFO - ⏱️ Execution time: 0:00:20.702846
