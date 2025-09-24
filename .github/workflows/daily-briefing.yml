@@ -44,17 +44,17 @@ jobs:
         HAS_CHAT: ${{ secrets.TELEGRAM_CHAT_ID != '' }}
 
     - name: Telegram preflight ping
+      continue-on-error: true
       env:
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       run: |
-        set -e
         echo "🔎 Telegram getMe:" 
-        curl -sS -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getMe"
+        curl -sS -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getMe" || true
         echo "\n📨 Sending preflight message..."
         curl -sS -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
              -H "Content-Type: application/json" \
-             -d "{\"chat_id\":\"${TELEGRAM_CHAT_ID}\",\"text\":\"✅ GitHub Actions preflight ping\",\"disable_web_page_preview\":true}"
+             -d "{\"chat_id\":\"${TELEGRAM_CHAT_ID}\",\"text\":\"✅ GitHub Actions preflight ping\",\"disable_web_page_preview\":true}" || true
 
     - name: Install dependencies
       run: |
