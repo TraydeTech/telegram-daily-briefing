@@ -23,10 +23,29 @@
       "the_verge": "https://www.theverge.com/rss/index.xml",
       "wired": "https://www.wired.com/feed/rss",
       "hacker_news_ai": "https://hnrss.org/frontpage",
-      "ai_news": "https://artificialintelligence-news.com/feed/"
+      "ai_news": "https://artificialintelligence-news.com/feed/",
+      "tecnoblog": "https://tecnoblog.net/feed/",
+      "olhar_digital": "https://olhardigital.com.br/rss",
+      "canaltech": "https://canaltech.com.br/rss/",
+      "startups": "https://startupi.com.br/feed/"
     },
     "web_scraping": {
-      "sites": []
+      "sites": [
+        {
+          "name": "thais_martan_linkedin",
+          "url": "https://www.linkedin.com/in/thais-martan-1a116014/",
+          "type": "linkedin",
+          "enabled": true,
+          "note": "Monitorar posts da Thais Martan sobre IA e tecnologia"
+        },
+        {
+          "name": "thais_martan_instagram",
+          "url": "https://www.instagram.com/thaismartan/",
+          "type": "instagram",
+          "enabled": true,
+          "note": "Monitorar posts da Thais Martan no Instagram"
+        }
+      ]
     }
   }
 }

@@ -143,10 +143,38 @@ class NewsCollector:
         return news_items
 
     def _collect_from_web(self) -> List[NewsItem]:
-        """Web scraping básico para sites sem RSS"""
+        """Web scraping para sites sem RSS e redes sociais"""
         news_items = []
 
-        # Exemplo: TechCrunch AI section (se não tiver RSS bom)
+        # Configurado via config/sources.json
+        scraping_sites = self.sources.get('web_scraping', {}).get('sites', [])
+
+        for site_config in scraping_sites:
+            if not site_config.get('enabled', False):
+                continue
+
+            site_name = site_config['name']
+            site_url = site_config['url']
+            site_type = site_config['type']
+
+            try:
+                logger.info(f"🌐 Scraping {site_name} ({site_type})")
+
+                if site_type == 'linkedin':
+                    items = self._scrape_linkedin_profile(site_config)
+                elif site_type == 'instagram':
+                    items = self._scrape_instagram_profile(site_config)
+                else:
+                    logger.warning(f"Unsupported scraping type: {site_type}")
+                    continue
+
+                news_items.extend(items)
+                logger.info(f"   ✅ Collected {len(items)} items from {site_name}")
+
+            except Exception as e:
+                logger.warning(f"❌ Web scraping failed for {site_name}: {e}")
+
+        # Fallback: TechCrunch AI section (se não tiver RSS bom)
         try:
             techcrunch_items = self._scrape_techcrunch_ai()
             news_items.extend(techcrunch_items)
@@ -218,6 +246,122 @@ class NewsCollector:
 
         return items
 
+    def _scrape_linkedin_profile(self, site_config: dict) -> List[NewsItem]:
+        """Web scraping de perfil do LinkedIn (limitado e responsável)"""
+        items = []
+
+        try:
+            url = site_config['url']
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                'Accept-Language': 'en-US,en;q=0.5',
+                'Accept-Encoding': 'gzip, deflate',
+                'Connection': 'keep-alive',
+                'Upgrade-Insecure-Requests': '1',
+            }
+
+            time.sleep(self.request_delay * 2)  # Extra delay para redes sociais
+            response = requests.get(url, headers=headers, timeout=15)
+
+            if response.status_code == 200:
+                soup = BeautifulSoup(response.content, 'html.parser')
+
+                # ⚠️ AVISO: Este scraping é limitado e pode violar termos de serviço
+                # Apenas para fins educacionais - não recomendado para produção
+
+                # Procurar posts recentes (muito limitado devido a proteções do LinkedIn)
+                posts = soup.find_all(['div', 'article'], class_=lambda x: x and 'feed' in x.lower(), limit=2)
+
+                for post in posts:
+                    try:
+                        # Extrair texto do post
+                        text_elem = post.find(['p', 'span'], class_=lambda x: x and ('text' in x.lower() or 'content' in x.lower()))
+                        if text_elem:
+                            text = text_elem.get_text().strip()[:200]
+
+                            # Criar item (com baixa prioridade por ser scraping limitado)
+                            item = NewsItem(
+                                title=f"LinkedIn Post - {site_config['name']}",
+                                summary=text,
+                                url=url,
+                                source=f"LinkedIn ({site_config['name']})",
+                                published_at=datetime.now()
+                            )
+                            items.append(item)
+
+                    except Exception as e:
+                        logger.debug(f"Error parsing LinkedIn post: {e}")
+                        continue
+
+                if not items:
+                    # Fallback: apenas indicar que há atividade no perfil
+                    item = NewsItem(
+                        title=f"LinkedIn Activity - {site_config['name']}",
+                        summary=f"Nova atividade detectada no perfil de {site_config['name']}. Visite: {url}",
+                        url=url,
+                        source=f"LinkedIn ({site_config['name']})",
+                        published_at=datetime.now()
+                    )
+                    items.append(item)
+
+            else:
+                logger.warning(f"LinkedIn request failed: {response.status_code}")
+
+        except Exception as e:
+            logger.warning(f"LinkedIn scraping error: {e}")
+
+        return items
+
+    def _scrape_instagram_profile(self, site_config: dict) -> List[NewsItem]:
+        """Web scraping de perfil do Instagram (limitado e responsável)"""
+        items = []
+
+        try:
+            url = site_config['url']
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                'Accept-Language': 'en-US,en;q=0.5',
+                'Accept-Encoding': 'gzip, deflate',
+                'Connection': 'keep-alive',
+                'Upgrade-Insecure-Requests': '1',
+            }
+
+            time.sleep(self.request_delay * 2)  # Extra delay para redes sociais
+            response = requests.get(url, headers=headers, timeout=15)
+
+            if response.status_code == 200:
+                soup = BeautifulSoup(response.content, 'html.parser')
+
+                # ⚠️ AVISO: Instagram tem proteções anti-scraping robustas
+                # Este método é muito limitado e pode não funcionar
+
+                # Tentar extrair metatags (mais confiável que scraping direto)
+                meta_desc = soup.find('meta', attrs={'name': 'description'})
+                meta_title = soup.find('meta', attrs={'property': 'og:title'})
+
+                if meta_desc or meta_title:
+                    title = meta_title.get('content', 'Instagram Post') if meta_title else 'Instagram Activity'
+                    summary = meta_desc.get('content', 'Nova atividade no Instagram') if meta_desc else 'Atividade detectada'
+
+                    item = NewsItem(
+                        title=f"{title} - {site_config['name']}",
+                        summary=summary[:200],
+                        url=url,
+                        source=f"Instagram ({site_config['name']})",
+                        published_at=datetime.now()
+                    )
+                    items.append(item)
+
+            else:
+                logger.warning(f"Instagram request failed: {response.status_code}")
+
+        except Exception as e:
+            logger.warning(f"Instagram scraping error: {e}")
+
+        return items
+
     def _filter_by_date_and_relevance(self, news_items: List[NewsItem]) -> List[NewsItem]:
         """Filtra notícias por data (24h) e relevância"""
         cutoff_date = datetime.now() - timedelta(hours=self.max_age_hours)
@@ -242,7 +386,7 @@ class NewsCollector:
             if is_recent:
                 # Cálculo de relevância baseado em keywords
                 relevance = self._calculate_relevance(item.title + " " + item.summary)
-                if relevance > 0.2:  # Threshold um pouco mais permissivo (era 0.3, agora 0.2)
+                if relevance > 0.3:  # Threshold ajustado (mais permissivo para conteúdo em PT e Thais)
                     item.relevance_score = relevance
                     filtered.append(item)
 
@@ -251,37 +395,62 @@ class NewsCollector:
         return filtered
 
     def _calculate_relevance(self, text: str) -> float:
-        """Calcula score de relevância baseado em keywords"""
+        """Calcula score de relevância baseado em keywords (inglês + português)"""
         text_lower = text.lower()
         score = 0.0
 
-        # Keywords de alta prioridade (foco principal)
-        high_priority = ['chatgpt', 'cursor', 'lovable', 'openai', 'anthropic', 'claude']
+        # Keywords de alta prioridade (foco principal + Thais Martan)
+        high_priority = [
+            'chatgpt', 'cursor', 'lovable', 'openai', 'anthropic', 'claude',
+            'thais martan', 'martan', 'thaismartan'  # Alta prioridade para conteúdo da Thais
+        ]
         for keyword in high_priority:
             if keyword in text_lower:
-                score += 1.0
+                score += 1.5  # Bônus extra para conteúdo prioritário
 
-        # Keywords de média prioridade (IA/ML)
-        medium_priority = ['ai', 'artificial intelligence', 'machine learning', 'deep learning',
-                          'neural network', 'gpt', 'llm', 'large language model']
-        for keyword in medium_priority:
+        # Keywords de média prioridade (IA/ML - inglês)
+        medium_priority_en = [
+            'ai', 'artificial intelligence', 'machine learning', 'deep learning',
+            'neural network', 'gpt', 'llm', 'large language model', 'robotics'
+        ]
+        for keyword in medium_priority_en:
+            if keyword in text_lower:
+                score += 0.5
+
+        # Keywords de média prioridade (IA/ML - português)
+        medium_priority_pt = [
+            'inteligência artificial', 'aprendizado máquina', 'aprendizado profundo',
+            'rede neural', 'ia', 'machine learning', 'deep learning', 'robótica',
+            'automação', 'tecnologia', 'inovação', 'startup', 'empreendedorismo'
+        ]
+        for keyword in medium_priority_pt:
             if keyword in text_lower:
                 score += 0.5
 
         # Keywords de baixa prioridade (tech geral - mais permissivo)
-        low_priority = ['tech', 'technology', 'startup', 'software', 'automation', 'robotics']
+        low_priority = [
+            'tech', 'technology', 'software', 'hardware', 'digital',
+            'tecnologia', 'software', 'hardware', 'digital', 'inovação'
+        ]
         for keyword in low_priority:
             if keyword in text_lower:
                 score += 0.2
 
-        # Bônus para títulos com termos de IA
-        title_indicators = ['ai', 'intelligence', 'neural', 'learning', 'gpt', 'model']
+        # Bônus para títulos com termos de IA (inglês + português)
+        title_indicators = [
+            'ai', 'intelligence', 'neural', 'learning', 'gpt', 'model',
+            'ia', 'inteligência', 'aprendizado', 'tecnologia'
+        ]
         title_words = text_lower.split()[:10]  # Primeiras 10 palavras (aprox. título)
         for word in title_indicators:
             if word in title_words:
                 score += 0.3
 
-        return min(score, 2.0)  # Máximo 2.0
+        # Bônus para conteúdo de redes sociais (LinkedIn, Instagram da Thais)
+        if any(social in text_lower for social in ['linkedin', 'instagram', 'thais martan']):
+            score += 0.8  # Bônus significativo para conteúdo da Thais
+
+        return min(score, 3.0)  # Máximo 3.0 (aumentado devido aos bônus)
 
     def _parse_rss_date(self, entry) -> Optional[datetime]:
         """Parse RSS date formats"""

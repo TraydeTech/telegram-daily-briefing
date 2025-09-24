@@ -50,7 +50,8 @@ class DeployManager:
         try:
             result = subprocess.run([sys.executable, '-m', 'pip', '--version'],
                                   capture_output=True, text=True, check=True)
-            print("  ✅ Pip encontrado"        except:
+            print("  ✅ Pip encontrado")
+        except:
             issues.append("Pip não encontrado")
 
         if issues:
