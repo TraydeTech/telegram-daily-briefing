@@ -7,6 +7,7 @@ Sistema automatizado de notícias diárias sobre IA
 import os
 import json
 import logging
+import sys
 from datetime import datetime
 from pathlib import Path
 
@@ -131,6 +132,8 @@ def main():
                 logger.info("✅ All messages sent successfully!")
             else:
                 logger.error("❌ Some messages failed to send")
+                # Fail the job so Actions shows the error clearly
+                raise RuntimeError("Telegram send failed")
         else:
             logger.info("ℹ️ No news to send today")
 
