@@ -51,6 +51,19 @@ jobs:
       run: |
         token="$(printf "%s" "$RAW_TOKEN" | tr -d '\r' | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
         chat="$(printf "%s" "$RAW_CHAT" | tr -d '\r' | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+        # Strip quotes and common prefixes
+        token=${token//\"/}
+        token=${token//\'/}
+        chat=${chat//\"/}
+        chat=${chat//\'/}
+        chat=${chat#chat_id=}
+        chat=${chat#chat=}
+        # Keep only allowed chars
+        chat=$(echo "$chat" | sed 's/[^0-9-]//g')
+        token=$(echo "$token" | sed 's/[^A-Za-z0-9:_-]//g')
+        # Validate formats
+        if [[ "$token" =~ ^[0-9]{5,}:[A-Za-z0-9_-]{30,}$ ]]; then TOKEN_FORMAT_OK=true; else TOKEN_FORMAT_OK=false; fi
+        if [[ "$chat" =~ ^-?[0-9]{5,}$ ]]; then CHAT_FORMAT_OK=true; else CHAT_FORMAT_OK=false; fi
         {
           echo "TOKEN_SANITIZED<<EOF"
           printf "%s" "$token"
@@ -63,6 +76,8 @@ jobs:
         } >> "$GITHUB_ENV"
         echo "TOKEN_LEN=${#token}"
         echo "CHAT_LEN=${#chat}"
+        echo "TOKEN_FORMAT_OK=$TOKEN_FORMAT_OK"
+        echo "CHAT_FORMAT_OK=$CHAT_FORMAT_OK"
 
     - name: Telegram preflight ping
       continue-on-error: true
