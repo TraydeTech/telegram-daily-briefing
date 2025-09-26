@@ -43,11 +43,26 @@ jobs:
         HAS_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN != '' }}
         HAS_CHAT: ${{ secrets.TELEGRAM_CHAT_ID != '' }}
 
+    - name: Sanitize Telegram secrets
+      shell: bash
+      env:
+        RAW_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        RAW_CHAT: ${{ secrets.TELEGRAM_CHAT_ID }}
+      run: |
+        token="$(printf "%s" "$RAW_TOKEN" | tr -d '\r' | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+        chat="$(printf "%s" "$RAW_CHAT" | tr -d '\r' | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+        echo "::add-mask::$token"
+        echo "::add-mask::$chat"
+        echo "TOKEN_SANITIZED=$token" >> $GITHUB_ENV
+        echo "CHAT_SANITIZED=$chat" >> $GITHUB_ENV
+        echo "TOKEN_LEN=${#token}"
+        echo "CHAT_LEN=${#chat}"
+
     - name: Telegram preflight ping
       continue-on-error: true
       env:
-        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        TELEGRAM_BOT_TOKEN: ${{ env.TOKEN_SANITIZED }}
+        TELEGRAM_CHAT_ID: ${{ env.CHAT_SANITIZED }}
       run: |
         echo "🔎 Telegram getMe:" 
         curl -sS -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getMe" || true
@@ -66,8 +81,8 @@ jobs:
 
     - name: Run briefing
       env:
-        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        TELEGRAM_BOT_TOKEN: ${{ env.TOKEN_SANITIZED }}
+        TELEGRAM_CHAT_ID: ${{ env.CHAT_SANITIZED }}
         DEBUG: ${{ github.event_name == 'workflow_dispatch' }}
         SEND_EMPTY_BRIEFING: true
       run: |
