@@ -99,8 +99,8 @@ def main():
         formatter = MessageFormatter(config.get('formatting', {}))
 
         # Initialize Telegram sender
-        telegram_token = os.getenv('TELEGRAM_BOT_TOKEN')
-        telegram_chat_id = os.getenv('TELEGRAM_CHAT_ID')
+        telegram_token = os.getenv('TELEGRAM_BOT_TOKEN', '').strip()
+        telegram_chat_id = os.getenv('TELEGRAM_CHAT_ID', '').strip()
 
         if not telegram_token or not telegram_chat_id:
             raise ValueError("TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID environment variables are required")
