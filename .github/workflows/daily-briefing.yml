@@ -51,10 +51,16 @@ jobs:
       run: |
         token="$(printf "%s" "$RAW_TOKEN" | tr -d '\r' | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
         chat="$(printf "%s" "$RAW_CHAT" | tr -d '\r' | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
-        echo "::add-mask::$token"
-        echo "::add-mask::$chat"
-        echo "TOKEN_SANITIZED=$token" >> $GITHUB_ENV
-        echo "CHAT_SANITIZED=$chat" >> $GITHUB_ENV
+        {
+          echo "TOKEN_SANITIZED<<EOF"
+          printf "%s" "$token"
+          echo
+          echo "EOF"
+          echo "CHAT_SANITIZED<<EOF"
+          printf "%s" "$chat"
+          echo
+          echo "EOF"
+        } >> "$GITHUB_ENV"
         echo "TOKEN_LEN=${#token}"
         echo "CHAT_LEN=${#chat}"
 
