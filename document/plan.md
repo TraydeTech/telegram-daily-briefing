@@ -50,8 +50,8 @@ Aguardar respostas do usuário para as perguntas em aberto antes de prosseguir p
 
 ### Respostas e decisões
 1. **Bot Telegram**:
-   - Token: 8357879376:AAEbwm6DT-pQngAUnd_3URAi0TUGGtovVdo
-   - Chat ID: 7842820997
+   - Token: <seu_token>
+   - Chat ID: <seu_chat_id>
    - Username: @TraydeNewsbot
 
 2. **Fontes de Notícias**:

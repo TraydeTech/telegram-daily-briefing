@@ -9,7 +9,7 @@ Sistema automatizado que envia briefings diários de notícias sobre IA via Tele
 - **Fontes**: APIs (OpenAI, Anthropic), RSS feeds (TechCrunch, VentureBeat, MIT Tech Review), web scraping
 - **Foco**: Priorizar ChatGPT, Cursor, Lovable + notícias relevantes de IA geral
 - **Critério**: Últimas 24 horas
-- **Telegram**: Bot @TraydeNewsbot, Chat ID: 7842820997, Token: 8357879376:AAEbwm6DT-pQngAUnd_3URAi0TUGGtovVdo
+- **Telegram**: Bot @TraydeNewsbot, Chat ID: <seu_chat_id>, Token: <seu_token>
 
 ## 🏗️ Arquitetura
 **Padrão**: Pipeline Procedural (NewsCollector → ContentProcessor → MessageFormatter → TelegramSender)

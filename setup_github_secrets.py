@@ -51,14 +51,18 @@ def setup_github_secrets():
         return False
 
     # Configurar secrets
+    # Ler de env ou solicitar ao usuário (nunca versionar tokens reais)
+    bot_token = os.getenv('TELEGRAM_BOT_TOKEN') or input('Informe TELEGRAM_BOT_TOKEN: ').strip()
+    chat_id = os.getenv('TELEGRAM_CHAT_ID') or input('Informe TELEGRAM_CHAT_ID: ').strip()
+
     secrets = {
         'TELEGRAM_BOT_TOKEN': {
             'description': 'Token do bot Telegram (@TraydeNewsbot)',
-            'value': '8357879376:AAEbwm6DT-pQngAUnd_3URAi0TUGGtovVdo'
+            'value': bot_token
         },
         'TELEGRAM_CHAT_ID': {
             'description': 'ID do chat para envio das mensagens',
-            'value': '7842820997'
+            'value': chat_id
         }
     }
 

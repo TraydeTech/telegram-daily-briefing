@@ -51,8 +51,8 @@ O script `deploy.py` configura automaticamente, ou manualmente:
 
 1. Vá para **Settings > Secrets and variables > Actions**
 2. Adicione os secrets:
-   - `TELEGRAM_BOT_TOKEN`: `8357879376:AAEbwm6DT-pQngAUnd_3URAi0TUGGtovVdo`
-   - `TELEGRAM_CHAT_ID`: `7842820997`
+   - `TELEGRAM_BOT_TOKEN`: `SEU_TOKEN_AQUI`
+   - `TELEGRAM_CHAT_ID`: `SEU_CHAT_ID_AQUI`
 
 ## 🔧 Como Usar
 
@@ -62,8 +62,8 @@ O script `deploy.py` configura automaticamente, ou manualmente:
 source venv/bin/activate
 
 # Configurar variáveis de ambiente
-export TELEGRAM_BOT_TOKEN="8357879376:AAEbwm6DT-pQngAUnd_3URAi0TUGGtovVdo"
-export TELEGRAM_CHAT_ID="7842820997"
+export TELEGRAM_BOT_TOKEN="SEU_TOKEN_AQUI"
+export TELEGRAM_CHAT_ID="SEU_CHAT_ID_AQUI"
 
 # Executar sistema
 python3 src/main.py
