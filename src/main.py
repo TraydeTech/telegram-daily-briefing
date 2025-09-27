@@ -5,6 +5,7 @@ Sistema automatizado de notícias diárias sobre IA
 """
 
 import os
+import re
 import json
 import logging
 import sys
@@ -98,11 +99,20 @@ def main():
         processor = ContentProcessor()
         formatter = MessageFormatter(config.get('formatting', {}))
 
-        # Initialize Telegram sender
-        telegram_token = os.getenv('TELEGRAM_BOT_TOKEN', '').strip()
-        telegram_chat_id = os.getenv('TELEGRAM_CHAT_ID', '').strip()
+        # Initialize Telegram sender (extra sanitization for CI secrets)
+        raw_token = os.getenv('TELEGRAM_BOT_TOKEN', '')
+        raw_chat = os.getenv('TELEGRAM_CHAT_ID', '')
 
-        if not telegram_token or not telegram_chat_id:
+        # Remove all whitespace and keep only allowed chars
+        telegram_token = ''.join(ch for ch in raw_token if ch.isalnum() or ch in [':', '-', '_'])
+        telegram_chat_id = ''.join(ch for ch in raw_chat if ch.isdigit() or ch == '-')
+
+        # Basic diagnostics (length/format only; no secrets)
+        token_ok = re.match(r'^\d{5,}:[A-Za-z0-9_-]{30,}$', telegram_token) is not None
+        chat_ok = re.match(r'^-?\d{5,}$', telegram_chat_id) is not None
+        logger.info(f"🔐 Token len={len(telegram_token)} ok={token_ok} | Chat len={len(telegram_chat_id)} ok={chat_ok}")
+
+        if not telegram_token or not telegram_chat_id or not token_ok or not chat_ok:
             raise ValueError("TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID environment variables are required")
 
         sender = TelegramSender(telegram_token, telegram_chat_id)
