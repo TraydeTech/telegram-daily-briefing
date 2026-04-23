@@ -75,19 +75,22 @@ class ContentProcessor:
 
     def _update_processed_state(self, processed_items: List[NewsItem]):
         """Atualiza estado dos itens processados"""
+        now = datetime.now().isoformat()
         for item in processed_items:
             self.processed_urls.add(item.url)
+            self.url_timestamps[item.url] = now
 
-        # Salva estado em arquivo
         self._save_processed_urls()
 
     def _load_processed_urls(self):
         """Carrega URLs processadas do arquivo de estado"""
+        self.url_timestamps: Dict[str, str] = {}
         try:
             if self.state_file.exists():
                 with open(self.state_file, 'r', encoding='utf-8') as f:
                     data = json.load(f)
                     self.processed_urls = set(data.get('processed_urls', []))
+                    self.url_timestamps = data.get('url_timestamps', {})
                     logger.info(f"📁 Loaded {len(self.processed_urls)} processed URLs")
             else:
                 logger.info("📁 No previous state file found, starting fresh")
@@ -100,6 +103,7 @@ class ContentProcessor:
         try:
             data = {
                 'processed_urls': list(self.processed_urls),
+                'url_timestamps': self.url_timestamps,
                 'last_updated': datetime.now().isoformat()
             }
 

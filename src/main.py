@@ -12,12 +12,14 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
+_ROOT = Path(__file__).parent.parent
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('briefing.log'),
+        logging.FileHandler(_ROOT / 'briefing.log'),
         logging.StreamHandler()
     ]
 )
@@ -49,7 +51,7 @@ except ImportError:
 
 def load_config() -> dict:
     """Load configuration from JSON files"""
-    config_dir = Path(__file__).parent.parent / 'config'
+    config_dir = _ROOT / 'config'
 
     # Load settings
     with open(config_dir / 'settings.json', 'r', encoding='utf-8') as f:
@@ -96,7 +98,7 @@ def main():
 
         # Initialize components
         collector = NewsCollector(config)
-        processor = ContentProcessor()
+        processor = ContentProcessor(str(_ROOT / 'news_state.json'))
         formatter = MessageFormatter(config.get('formatting', {}))
 
         # Initialize Telegram sender (extra sanitization for CI secrets)
