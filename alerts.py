@@ -14,13 +14,15 @@ import requests
 import json
 from pathlib import Path
 
+_ROOT = Path(__file__).parent
+
 class AlertSystem:
     """Sistema de alertas e notificações"""
 
     def __init__(self):
         self.telegram_token = os.getenv('TELEGRAM_BOT_TOKEN')
         self.telegram_chat_id = os.getenv('TELEGRAM_CHAT_ID')
-        self.alerts_file = Path('alerts_history.json')
+        self.alerts_file = _ROOT / 'alerts_history.json'
         self._load_alerts_history()
 
     def _load_alerts_history(self):
@@ -141,7 +143,7 @@ class AlertSystem:
         issues = []
 
         # Verifica se arquivo de estado existe e foi atualizado recentemente
-        state_file = Path('news_state.json')
+        state_file = _ROOT / 'news_state.json'
         if state_file.exists():
             try:
                 with open(state_file, 'r') as f:
@@ -159,7 +161,7 @@ class AlertSystem:
             issues.append("Arquivo de estado não encontrado")
 
         # Verifica tamanho do log
-        log_file = Path('briefing.log')
+        log_file = _ROOT / 'briefing.log'
         if log_file.exists():
             size_mb = log_file.stat().st_size / (1024 * 1024)
             if size_mb > 50:  # Log muito grande

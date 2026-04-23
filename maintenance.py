@@ -10,8 +10,8 @@ import shutil
 from pathlib import Path
 from datetime import datetime, timedelta
 
-# Importa módulos locais
-sys.path.insert(0, str(Path(__file__).parent))
+_ROOT = Path(__file__).parent
+sys.path.insert(0, str(_ROOT / 'src'))
 
 def cleanup_temp_files():
     """Limpa arquivos temporários"""
@@ -30,7 +30,7 @@ def cleanup_temp_files():
     for pattern in temp_files:
         if '*' in pattern:
             # Remove arquivos com padrão
-            for file_path in Path('.').rglob(pattern):
+            for file_path in _ROOT.rglob(pattern):
                 try:
                     if file_path.is_file():
                         file_path.unlink()
@@ -40,7 +40,7 @@ def cleanup_temp_files():
                     print(f"  ❌ Error removing {file_path}: {e}")
         else:
             # Remove diretório específico
-            for dir_path in Path('.').rglob(pattern):
+            for dir_path in _ROOT.rglob(pattern):
                 try:
                     if dir_path.is_dir():
                         shutil.rmtree(dir_path)
@@ -53,10 +53,10 @@ def cleanup_temp_files():
     return cleaned
 
 def optimize_state_file():
-    """Otimiza arquivo de estado removendo entradas antigas"""
+    """Otimiza arquivo de estado removendo entradas com mais de 30 dias"""
     print("🔧 Otimizando arquivo de estado...")
 
-    state_file = Path('news_state.json')
+    state_file = _ROOT / 'news_state.json'
     if not state_file.exists():
         print("  ⚠️ Arquivo de estado não encontrado")
         return False
@@ -66,40 +66,57 @@ def optimize_state_file():
         with open(state_file, 'r', encoding='utf-8') as f:
             state = json.load(f)
 
-        original_count = len(state.get('processed_urls', []))
+        original_urls = state.get('processed_urls', [])
+        url_timestamps = state.get('url_timestamps', {})
+        original_count = len(original_urls)
         original_size = state_file.stat().st_size
 
-        # Remove URLs antigas (mais de 30 dias)
         cutoff_date = datetime.now() - timedelta(days=30)
-        filtered_urls = []
 
-        for url in state.get('processed_urls', []):
-            # Como não temos data por URL, mantemos apenas as mais recentes
-            # Implementação simplificada: mantém apenas 50% das URLs mais recentes
-            pass
+        # Filtra URLs: mantém as que têm timestamp recente ou sem timestamp (conservador)
+        kept_urls = []
+        for url in original_urls:
+            ts = url_timestamps.get(url)
+            if ts is None:
+                kept_urls.append(url)  # sem data → mantém por segurança
+            else:
+                try:
+                    if datetime.fromisoformat(ts) >= cutoff_date:
+                        kept_urls.append(url)
+                except ValueError:
+                    kept_urls.append(url)  # data inválida → mantém
 
-        # Por enquanto, apenas compacta removendo duplicatas
-        unique_urls = list(set(state.get('processed_urls', [])))
+        # Remove duplicatas preservando ordem
+        seen = set()
+        unique_urls = []
+        for url in kept_urls:
+            if url not in seen:
+                seen.add(url)
+                unique_urls.append(url)
 
-        if len(unique_urls) < original_count:
-            state['processed_urls'] = unique_urls
-            state['last_optimized'] = datetime.now().isoformat()
-            state['optimization_info'] = f"Removed {original_count - len(unique_urls)} duplicate URLs"
+        # Limpa timestamps órfãos
+        url_set = set(unique_urls)
+        cleaned_timestamps = {u: t for u, t in url_timestamps.items() if u in url_set}
 
-            with open(state_file, 'w', encoding='utf-8') as f:
-                json.dump(state, f, indent=2, ensure_ascii=False)
+        removed = original_count - len(unique_urls)
 
-            new_size = state_file.stat().st_size
-            savings = original_size - new_size
+        state['processed_urls'] = unique_urls
+        state['url_timestamps'] = cleaned_timestamps
+        state['last_optimized'] = datetime.now().isoformat()
+        state['optimization_info'] = f"Removed {removed} entries (duplicates or older than 30 days)"
 
-            print(f"✅ Otimização concluída:")
-            print(f"   URLs originais: {original_count}")
-            print(f"   URLs após limpeza: {len(unique_urls)}")
-            print(f"   Economia de espaço: {savings} bytes")
-            return True
-        else:
-            print("  ℹ️ Arquivo de estado já otimizado")
-            return True
+        with open(state_file, 'w', encoding='utf-8') as f:
+            json.dump(state, f, indent=2, ensure_ascii=False)
+
+        new_size = state_file.stat().st_size
+        savings = original_size - new_size
+
+        print(f"✅ Otimização concluída:")
+        print(f"   URLs originais: {original_count}")
+        print(f"   URLs após limpeza: {len(unique_urls)}")
+        print(f"   Entradas removidas: {removed}")
+        print(f"   Economia de espaço: {savings} bytes")
+        return True
 
     except Exception as e:
         print(f"  ❌ Erro na otimização: {e}")
@@ -113,10 +130,10 @@ def check_system_integrity():
 
     # Verifica arquivos essenciais
     essential_files = [
-        'src/main.py',
-        'config/sources.json',
-        'config/settings.json',
-        'requirements.txt'
+        _ROOT / 'src/main.py',
+        _ROOT / 'config/sources.json',
+        _ROOT / 'config/settings.json',
+        _ROOT / 'requirements.txt',
     ]
 
     for file_path in essential_files:
@@ -125,7 +142,7 @@ def check_system_integrity():
 
     # Verifica se pode importar módulos principais
     try:
-        sys.path.insert(0, 'src')
+        sys.path.insert(0, str(_ROOT / 'src'))
         import news_collector
         import telegram_sender
         import content_processor
@@ -137,9 +154,9 @@ def check_system_integrity():
     # Verifica configurações JSON
     try:
         import json
-        with open('config/sources.json', 'r') as f:
+        with open(_ROOT / 'config/sources.json', 'r') as f:
             json.load(f)
-        with open('config/settings.json', 'r') as f:
+        with open(_ROOT / 'config/settings.json', 'r') as f:
             json.load(f)
         print("  ✅ Arquivos de configuração válidos")
     except Exception as e:
@@ -158,7 +175,7 @@ def backup_important_files():
     """Faz backup de arquivos importantes"""
     print("💾 Criando backup de arquivos importantes...")
 
-    backup_dir = Path('backups')
+    backup_dir = _ROOT / 'backups'
     backup_dir.mkdir(exist_ok=True)
 
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
@@ -167,10 +184,10 @@ def backup_important_files():
     backup_path.mkdir()
 
     important_files = [
-        'news_state.json',
-        'briefing.log',
-        'config/',
-        'src/'
+        _ROOT / 'news_state.json',
+        _ROOT / 'briefing.log',
+        _ROOT / 'config',
+        _ROOT / 'src',
     ]
 
     backed_up = 0

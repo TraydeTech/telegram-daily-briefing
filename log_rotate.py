@@ -10,11 +10,13 @@ import logging
 from pathlib import Path
 from datetime import datetime, timedelta
 
+_ROOT = Path(__file__).parent
+
 class LogRotator:
     """Gerenciador de rotação de logs"""
 
-    def __init__(self, log_file='briefing.log', max_size_mb=10, backup_count=5):
-        self.log_file = Path(log_file)
+    def __init__(self, log_file=None, max_size_mb=10, backup_count=5):
+        self.log_file = Path(log_file) if log_file else _ROOT / 'briefing.log'
         self.max_size_mb = max_size_mb
         self.backup_count = backup_count
 

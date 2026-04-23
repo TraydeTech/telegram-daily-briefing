@@ -35,15 +35,15 @@
           "name": "thais_martan_linkedin",
           "url": "https://www.linkedin.com/in/thais-martan-1a116014/",
           "type": "linkedin",
-          "enabled": true,
-          "note": "Monitorar posts da Thais Martan sobre IA e tecnologia"
+          "enabled": false,
+          "note": "LinkedIn bloqueia scraping automatizado (HTTP 999). Para monitorar, use a API oficial do LinkedIn ou verifique manualmente."
         },
         {
           "name": "thais_martan_instagram",
           "url": "https://www.instagram.com/thaismartan/",
           "type": "instagram",
           "enabled": true,
-          "note": "Monitorar posts da Thais Martan no Instagram"
+          "note": "Monitorar posts da Thais Martan no Instagram via metatags"
         }
       ]
     }
