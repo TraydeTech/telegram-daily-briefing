@@ -105,3 +105,4 @@ jobs:
         name: briefing-logs
         path: logs/
         retention-days: 7
+        
