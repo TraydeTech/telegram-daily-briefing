@@ -2,8 +2,8 @@ name: Daily AI News Briefing
 
 on:
   schedule:
-    # 8:00, 12:00, 18:00 BRT (UTC-3)
-    - cron: '0 11,15,21 * * *'  # UTC times: 11:00, 15:00, 21:00
+    # 8:00 e 13:00 BRT (UTC-3)
+    - cron: '0 11,16 * * *'  # UTC times: 11:00, 16:00
   workflow_dispatch:  # Manual trigger for testing
   push:
     branches: [ main ]
